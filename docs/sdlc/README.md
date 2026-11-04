@@ -23,7 +23,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 ▎
 ▎ Audit: record who changed or approved any timesheet, and when.
 
-**Documentation version:** v5
+**Documentation version:** v6
 <!-- sdlc:auto:end overview -->
 
 ## Contents
@@ -34,7 +34,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [Requirements](requirements/README.md) | v1 approved |
 | [Architecture](architecture/README.md) | 32 entries |
 | [Development](development/README.md) | 16 entries |
-| [Testing](testing/README.md) | 1 entry |
+| [Testing](testing/README.md) | 2 entries |
 | [Deployment](deployment/README.md) | 3 entries |
 | [Maintenance](maintenance/README.md) | 1 entry |
 | [Data model](architecture/data-model.md) | generated |
@@ -49,7 +49,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [Runbook](deployment/runbook.md) | deployed |
 | [Release notes](deployment/release-notes.md) | 1 release |
 | [Traceability matrix](traceability-matrix.md) | 33 requirements |
-| [Changelog](CHANGELOG.md) | 5 versions |
+| [Changelog](CHANGELOG.md) | 6 versions |
 <!-- sdlc:auto:end contents -->
 
 ## Open gaps
@@ -196,7 +196,24 @@ Build a time and labour management web app for a company of up to 500 employees,
 
 ### Testing
 
-- Testing phase has not started. None of the 107 acceptance criteria have recorded verification.
+- The names, types and scope of the 4 checks are not given. It is unknown whether they are unit tests, lint, type checks, a build or something else.
+- The run is not linked to a ticket (ticket=None), so it cannot be traced to a development change.
+- The run is not linked to any requirement (US-001 to US-033), so no requirement can be marked as verified from this result.
+- No run date or timestamp is provided.
+- The environment and build/commit under test are not identified.
+- No test logs, artefacts or coverage figures are provided.
+- No test plan or test cases are provided for any requirement.
+- No requirement-to-test traceability exists. Each of US-001 to US-033 is currently unverified.
+- No role-based access control or permission testing is recorded.
+- No tests are recorded for the overtime and break-rule calculations. These are business-critical labour-rule logic (e.g. 8 h/day, 40 h/week, break after 6 h).
+- No tests are recorded for timesheet locking after approval, or for audit trail completeness.
+- No tests are recorded for the accuracy of the payroll CSV export (approved hours only, per employee per period).
+- No tests are recorded for leave balance accrual or half-day handling.
+- No performance or load testing is recorded for the stated scale of up to 500 employees.
+- No security testing is recorded (authentication, password handling, session management).
+- No user acceptance testing or sign-off is recorded.
+- No defects or bug reports are recorded, and it is unknown whether any exist.
+- No industry or domain skill was specified, so no regulatory compliance tracing was performed.
 
 ### Deployment
 
