@@ -23,7 +23,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 ▎
 ▎ Audit: record who changed or approved any timesheet, and when.
 
-**Documentation version:** v6
+**Documentation version:** v7
 <!-- sdlc:auto:end overview -->
 
 ## Contents
@@ -43,13 +43,13 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [Sprint plan](development/sprint-plan.md) | 7 sprints |
 | [Developer guide](development/developer-guide.md) | generated |
 | [API reference](development/api-reference.md) | 6 routes |
-| [Test report](testing/test-report.md) | not run yet |
+| [Test report](testing/test-report.md) | running |
 | [Tests](testing/test-cases.md) | 4 tests |
 | [Deployment guide](deployment/deployment-guide.md) | deployed |
 | [Runbook](deployment/runbook.md) | deployed |
-| [Release notes](deployment/release-notes.md) | 1 release |
+| [Release notes](deployment/release-notes.md) | 2 releases |
 | [Traceability matrix](traceability-matrix.md) | 33 requirements |
-| [Changelog](CHANGELOG.md) | 6 versions |
+| [Changelog](CHANGELOG.md) | 7 versions |
 <!-- sdlc:auto:end contents -->
 
 ## Open gaps
@@ -217,23 +217,24 @@ Build a time and labour management web app for a company of up to 500 employees,
 
 ### Deployment
 
-- No deployment date or time recorded.
-- No record of who performed or approved this deployment.
-- No release notes, and no list of which requirements (US-001 to US-033) are included in this version. related_ids to requirements cannot be set.
-- Environment type is not stated (production, staging, or demo). 'Live' alone does not confirm this is the production environment for end users.
-- No post-deployment smoke test or health-check results recorded.
-- No rollback plan or previous version identifier recorded.
-- No monitoring, logging, or alerting configuration recorded.
-- No database or migration details recorded. This matters because the app stores timesheets, leave balances, payroll exports, and audit history (US-related audit requirement).
-- No backup or data-retention arrangements recorded for timesheet and audit data.
-- No custom domain recorded. The default Amplify domain is in use, and it is not stated whether this is intended for end users.
-- No confirmation that the frontend is configured to call the backend URL listed for this release.
-- No browser compatibility or accessibility verification recorded for the deployed build.
-- Use of an sslip.io hostname (a direct IP mapping) should be confirmed as intended. It may not be suitable for a production system handling employee sign-in credentials and payroll data.
-- No information on the hosting provider, server or runtime, scaling, or availability for up to 500 employees.
-- No record of TLS certificate management, CORS configuration, or security hardening.
-- No record of how secrets and credentials (e.g. database, password hashing configuration) are managed in this environment.
-- No API health-check result recorded for this deployment.
+- No deployment date or time was recorded.
+- No deployer or release approver was recorded.
+- The environment is not labelled (production, staging, or demo). 'Live' alone does not say whether this is the production release for the up-to-500-employee company.
+- No release notes were provided. It is unknown which requirements (US-001 to US-033) are included in this version, so related_ids cannot be linked to specific requirements.
+- No pre-deployment test or QA results are referenced for this version.
+- No post-deployment smoke-test or health-check results were recorded.
+- No rollback plan or previous version was recorded.
+- No database migration, seed data, or initial System Admin account setup steps were recorded. The app depends on admins creating users and assigning managers.
+- No monitoring, logging, alerting, or backup configuration was recorded. This matters because the app stores timesheet, payroll-export, and audit-trail data.
+- The version is the same string for frontend and backend. It is not stated whether both components were built from the same commit.
+- No custom or company domain is recorded. The URL is a generated hosting subdomain, so it should be confirmed whether this is the intended long-term user-facing address.
+- It is not recorded how the frontend is configured to reach the backend URL (for example, environment variables or build-time config).
+- Browser support and accessibility checks for the deployed build are not recorded.
+- The backend is reached through an IP-based sslip.io hostname. It should be confirmed whether this is acceptable for a live system holding employee time, leave, and payroll data, or whether a dedicated domain and certificate are planned.
+- Server hosting provider, runtime, scaling, and capacity for up to 500 employees are not recorded.
+- Database location, backup schedule, and data-retention settings are not recorded. This matters especially for audit records of timesheet changes and approvals.
+- CORS, authentication/session configuration, and secrets management for the deployed backend are not recorded.
+- It is not recorded whether the shared host (/apps/ path) isolates this app's data from other apps.
 
 ### Maintenance
 

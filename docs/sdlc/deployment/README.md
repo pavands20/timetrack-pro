@@ -3,55 +3,60 @@
 > Maintained by QuorQ AI SDLC. Text between `sdlc:auto` markers is regenerated; anything outside them is yours and is kept.
 
 <!-- sdlc:auto:start narrative -->
-### DEP-3d13b3f26251 · draft · source: deployment:3d13b3f26251
+### DEP-a08a3ea55954 · approved · source: deployment:a08a3ea55954
 
-Release 3d13b3f26251 of TimeTrack Pro is recorded with status "live". It consists of a frontend and a backend, each with its own public URL. No date, approver, or release notes were provided.
+TimeTrack Pro version a08a3ea55954 is recorded as live. The release has a separate frontend and backend, each with its own public URL. No other deployment metadata was supplied.
 
-- Version: 3d13b3f26251 (appears to be a commit hash or build identifier; the input does not say which)
-- Reported status: live
+- Deployment status: live
+- Version identifier: a08a3ea55954. This looks like a short source-control commit hash, but the input does not confirm it.
 - Frontend URL: https://pb05224319b77.d3j61xaup4zgrx.amplifyapp.com
 - Backend URL: https://32-189-101-24.sslip.io/apps/b05224319b77/
-- Entry status is set to 'draft' because no release approval is recorded in the input. The deployment itself is reported as live.
+- Both URLs use HTTPS.
+- Status is set to 'approved' only because the input says the release is live. No explicit sign-off or approver was provided.
 
-**Related:** DEP-3d13b3f26251-FE, DEP-3d13b3f26251-BE
+**Related:** DEP-a08a3ea55954-FE, DEP-a08a3ea55954-BE
 
-- ⚠ No deployment date or time recorded.
-- ⚠ No record of who performed or approved this deployment.
-- ⚠ No release notes, and no list of which requirements (US-001 to US-033) are included in this version. related_ids to requirements cannot be set.
-- ⚠ Environment type is not stated (production, staging, or demo). 'Live' alone does not confirm this is the production environment for end users.
-- ⚠ No post-deployment smoke test or health-check results recorded.
-- ⚠ No rollback plan or previous version identifier recorded.
-- ⚠ No monitoring, logging, or alerting configuration recorded.
-- ⚠ No database or migration details recorded. This matters because the app stores timesheets, leave balances, payroll exports, and audit history (US-related audit requirement).
-- ⚠ No backup or data-retention arrangements recorded for timesheet and audit data.
+- ⚠ No deployment date or time was recorded.
+- ⚠ No deployer or release approver was recorded.
+- ⚠ The environment is not labelled (production, staging, or demo). 'Live' alone does not say whether this is the production release for the up-to-500-employee company.
+- ⚠ No release notes were provided. It is unknown which requirements (US-001 to US-033) are included in this version, so related_ids cannot be linked to specific requirements.
+- ⚠ No pre-deployment test or QA results are referenced for this version.
+- ⚠ No post-deployment smoke-test or health-check results were recorded.
+- ⚠ No rollback plan or previous version was recorded.
+- ⚠ No database migration, seed data, or initial System Admin account setup steps were recorded. The app depends on admins creating users and assigning managers.
+- ⚠ No monitoring, logging, alerting, or backup configuration was recorded. This matters because the app stores timesheet, payroll-export, and audit-trail data.
+- ⚠ The version is the same string for frontend and backend. It is not stated whether both components were built from the same commit.
 
-### DEP-3d13b3f26251-FE · draft · source: deployment:3d13b3f26251
+### DEP-a08a3ea55954-FE · approved · source: deployment:a08a3ea55954
 
-The frontend web application for release 3d13b3f26251 is served from an AWS Amplify hosted URL over HTTPS.
+Public frontend endpoint for the live TimeTrack Pro web app. This is the browser entry point that employees, managers, payroll admins, and system admins would use.
 
 - URL: https://pb05224319b77.d3j61xaup4zgrx.amplifyapp.com
-- Hosting: AWS Amplify, inferred only from the amplifyapp.com domain. No hosting configuration was provided.
 - Protocol: HTTPS
+- Hosting: the amplifyapp.com domain suggests AWS Amplify Hosting. This is inferred from the URL only and is not stated in the input.
+- Version: a08a3ea55954
 
-**Related:** DEP-3d13b3f26251
+**Related:** DEP-a08a3ea55954
 
-- ⚠ No custom domain recorded. The default Amplify domain is in use, and it is not stated whether this is intended for end users.
-- ⚠ No confirmation that the frontend is configured to call the backend URL listed for this release.
-- ⚠ No browser compatibility or accessibility verification recorded for the deployed build.
+- ⚠ No custom or company domain is recorded. The URL is a generated hosting subdomain, so it should be confirmed whether this is the intended long-term user-facing address.
+- ⚠ It is not recorded how the frontend is configured to reach the backend URL (for example, environment variables or build-time config).
+- ⚠ Browser support and accessibility checks for the deployed build are not recorded.
 
-### DEP-3d13b3f26251-BE · draft · source: deployment:3d13b3f26251
+### DEP-a08a3ea55954-BE · approved · source: deployment:a08a3ea55954
 
-The backend for release 3d13b3f26251 is exposed at an HTTPS path on an sslip.io hostname that resolves to IP 32.189.101.24. No hosting or infrastructure details were provided.
+Public backend endpoint for the live TimeTrack Pro release. It serves the frontend and is assumed to host authentication, time entries, approvals, leave, reports, CSV export, notifications, and audit logging, but the input does not confirm what it serves.
 
 - URL: https://32-189-101-24.sslip.io/apps/b05224319b77/
-- Hostname pattern: sslip.io is a wildcard DNS service that maps the hostname to IP 32.189.101.24.
-- App path segment: /apps/b05224319b77/. This matches the identifier in the frontend hostname (pb05224319b77), which suggests both URLs belong to the same app instance. This is an inference, not stated in the input.
+- Protocol: HTTPS
+- Hostname: sslip.io is a wildcard DNS service that maps the hostname to the embedded IP address, here 32.189.101.24. The backend is therefore addressed by that IP rather than a dedicated domain.
+- Path prefix: /apps/b05224319b77/. This suggests a shared host serving several apps, but that is inferred and not stated.
+- Version: a08a3ea55954
 
-**Related:** DEP-3d13b3f26251
+**Related:** DEP-a08a3ea55954
 
-- ⚠ Use of an sslip.io hostname (a direct IP mapping) should be confirmed as intended. It may not be suitable for a production system handling employee sign-in credentials and payroll data.
-- ⚠ No information on the hosting provider, server or runtime, scaling, or availability for up to 500 employees.
-- ⚠ No record of TLS certificate management, CORS configuration, or security hardening.
-- ⚠ No record of how secrets and credentials (e.g. database, password hashing configuration) are managed in this environment.
-- ⚠ No API health-check result recorded for this deployment.
+- ⚠ The backend is reached through an IP-based sslip.io hostname. It should be confirmed whether this is acceptable for a live system holding employee time, leave, and payroll data, or whether a dedicated domain and certificate are planned.
+- ⚠ Server hosting provider, runtime, scaling, and capacity for up to 500 employees are not recorded.
+- ⚠ Database location, backup schedule, and data-retention settings are not recorded. This matters especially for audit records of timesheet changes and approvals.
+- ⚠ CORS, authentication/session configuration, and secrets management for the deployed backend are not recorded.
+- ⚠ It is not recorded whether the shared host (/apps/ path) isolates this app's data from other apps.
 <!-- sdlc:auto:end narrative -->
