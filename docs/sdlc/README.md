@@ -1,0 +1,133 @@
+# TimeTrack Pro — SDLC Documentation
+
+> Maintained by QuorQ AI SDLC. Text between `sdlc:auto` markers is regenerated; anything outside them is yours and is kept.
+
+<!-- sdlc:auto:start overview -->
+Build a time and labour management web app for a company of up to 500 employees, similar to Replicon.
+▎
+▎ Users and roles: Employee, Manager, Payroll Admin, System Admin. Sign-in with email and password. Admins create users and assign each employee a manager.
+▎
+▎ Time tracking: employees clock in and out (with breaks) from the browser, or fill a weekly timesheet by day. Each time entry is charged to a project and task. Entries can be marked billable or non-billable.
+▎
+▎ Projects: admins create clients, projects and tasks, with an hourly bill rate per project.
+▎
+▎ Timesheet approval: employees submit their week. The manager approves or rejects it with a comment, and a rejected sheet goes back for editing. Approved sheets are locked.
+▎
+▎ Time off: employees request leave (annual, sick, unpaid) for full or half days. The manager approves it. Each employee sees their leave balance, which grows by a fixed number of days per month.
+▎
+▎ Labour rules: an admin sets the daily and weekly overtime limits, for example 8 h per day and 40 h per week, plus the minimum break after 6 hours. The app flags overtime and missed breaks on the timesheet and in a compliance report.
+▎
+▎ Reports: hours by employee, project and week; billable versus non-billable hours; overtime; leave taken. Export to CSV, including a payroll export of approved hours per employee per period.
+▎
+▎ Notifications: in-app alerts for a timesheet due, approved or rejected, and a leave request decided.
+▎
+▎ Audit: record who changed or approved any timesheet, and when.
+
+**Documentation version:** v1
+<!-- sdlc:auto:end overview -->
+
+## Contents
+
+<!-- sdlc:auto:start contents -->
+| Document | State |
+|---|---|
+| [Requirements](requirements/README.md) | v1 approved |
+| [Architecture](architecture/README.md) | 1 entry |
+| [Development](development/README.md) | 1 entry |
+| [Testing](testing/README.md) | 1 entry |
+| [Deployment](deployment/README.md) | 1 entry |
+| [Maintenance](maintenance/README.md) | 1 entry |
+| [Data model](architecture/data-model.md) | not generated yet |
+| [API (OpenAPI)](architecture/api/openapi.yaml) | not generated yet |
+| [Decisions (ADRs)](architecture/adr/README.md) | 0 decisions |
+| [Sprint plan](development/sprint-plan.md) | not generated yet |
+| [Developer guide](development/developer-guide.md) | not generated yet |
+| [API reference](development/api-reference.md) | 0 routes |
+| [Test report](testing/test-report.md) | not run yet |
+| [Tests](testing/test-cases.md) | 0 tests |
+| [Deployment guide](deployment/deployment-guide.md) | not deployed yet |
+| [Runbook](deployment/runbook.md) | not deployed yet |
+| [Release notes](deployment/release-notes.md) | 0 releases |
+| [Traceability matrix](traceability-matrix.md) | 33 requirements |
+| [Changelog](CHANGELOG.md) | 1 version |
+<!-- sdlc:auto:end contents -->
+
+## Open gaps
+
+<!-- sdlc:auto:start open-gaps -->
+### Requirements
+
+- The project description says 'up to 500 employees', but the stack rationale, US-033 and NFR-013 size the system for 50 employees. Needs resolution.
+- Currency default is stated as 'EUR or GBP' without saying which one applies by default.
+- EPIC-010 still lists the stack as 'React, Node/TypeScript, PostgreSQL ... to be confirmed at the stack screen'. This conflicts with the approved FastAPI backend, so EPIC-010 text appears stale and should be updated.
+- The approver's name and the approval date are not recorded.
+- References an 'architecture finding' that is not present in any provided input.
+- No story covers deactivating a user account, although AC-003 depends on deactivated accounts existing.
+- The content of each role's home screen is not specified, except the Employee dashboard (US-010).
+- Not stated what happens to items already pending with the old manager when an employee's manager changes.
+- No acceptance criterion covers deactivating users.
+- The link expiry duration is not specified.
+- Which admin role(s) may trigger a reset is not specified.
+- System Admin data visibility (outside audit history and user admin) is not specified.
+- Which admin role is meant ('admin') is not specified.
+- Archiving or deleting clients, projects and tasks is not specified.
+- Not stated whether a rate change applies retroactively to past billable values.
+- Behaviour for an entry left running across midnight or the end of the week is not specified.
+- No default billable value per project or task is specified.
+- No approval cover is defined for an absent manager or an employee without a manager.
+- AC-037 requires an in-app notification to the manager on submission, but US-026 lists no 'timesheet submitted' alert type for managers.
+- The status of an unlocked sheet, and whether it must be re-approved, is not specified.
+- Leave cancellation or withdrawal is not specified.
+- No year-end carry-over or cap on balances is specified.
+- AC-052 is explicitly marked 'assumption: to be confirmed'.
+- Not stated whether a sick-leave balance limits requests.
+- Not stated whether rejecting a leave request requires a comment.
+- Not stated whether sick leave is deducted from a sick balance.
+- Opening balances and pro-rating for joiners are not specified.
+- Not stated whether leave hours are included in the payroll export.
+- The WTD 48 h average and 11 h rest checks are deferred on a low-confidence assumption and need confirmation.
+- Not stated whether rule changes re-evaluate flags on past weeks.
+- Not stated whether the other reports include unapproved hours.
+- The available filters are not enumerated.
+- How a period is defined (date range vs fixed pay period) is not specified.
+- The exact trigger time for 'timesheet due' is not confirmed.
+- Alerts to managers (e.g. a timesheet submitted, as implied by AC-037, or a leave request pending) are not listed.
+- Audit of non-timesheet actions (user admin, role changes, leave decisions, labour-rule changes) is not required.
+- Behaviour after 6 years (deletion or retention) is not specified.
+- The stated Node/TypeScript backend conflicts with the approved FastAPI 0.115 backend (REQ-STACK).
+- The 'Map' term in the intake was ambiguous. A location map is listed as out of scope, yet EPIC-010 says 'Map' was read as MVP. This needs explicit confirmation.
+- The story promises protection 'at rest', but no acceptance criterion verifies encryption at rest.
+- Sizing for 50 employees conflicts with the project description's 'up to 500 employees'.
+- No measurable response-time target is given.
+- No hashing algorithm or parameters are specified.
+- No rate limiting or lockout against brute force is specified.
+- No expiry duration is specified.
+- The at-rest protection mechanism is unspecified and not covered by an acceptance criterion.
+- The specific region is not chosen.
+- No manual procedure for leaver data is documented.
+- It is unclear how manual leaver handling reconciles with immutable 6-year audit records (NFR-010/NFR-011).
+- The WTD 48 h average and 11 h daily rest checks are deferred.
+- Conflicts with the 'up to 500 employees' in the project description.
+- No latency target is given.
+
+### Architecture
+
+- Architecture phase has not started. There is no system design, data model, API design or hosting topology.
+- US-003 references an 'architecture finding' that does not exist in the provided input.
+
+### Development
+
+- Development phase has not started: there is no sprint plan or implementation record.
+
+### Testing
+
+- Testing phase has not started. None of the 107 acceptance criteria have recorded verification.
+
+### Deployment
+
+- No deployment recorded yet. EU/UK region hosting (NFR-006) and HTTPS (NFR-005) remain unverified.
+
+### Maintenance
+
+- Maintenance phase has not started because nothing has been deployed.
+<!-- sdlc:auto:end open-gaps -->
