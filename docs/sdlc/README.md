@@ -23,7 +23,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 ▎
 ▎ Audit: record who changed or approved any timesheet, and when.
 
-**Documentation version:** v2
+**Documentation version:** v3
 <!-- sdlc:auto:end overview -->
 
 ## Contents
@@ -33,7 +33,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 |---|---|
 | [Requirements](requirements/README.md) | v1 approved |
 | [Architecture](architecture/README.md) | 32 entries |
-| [Development](development/README.md) | 1 entry |
+| [Development](development/README.md) | 20 entries |
 | [Testing](testing/README.md) | 1 entry |
 | [Deployment](deployment/README.md) | 1 entry |
 | [Maintenance](maintenance/README.md) | 1 entry |
@@ -49,7 +49,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [Runbook](deployment/runbook.md) | not deployed yet |
 | [Release notes](deployment/release-notes.md) | 0 releases |
 | [Traceability matrix](traceability-matrix.md) | 33 requirements |
-| [Changelog](CHANGELOG.md) | 2 versions |
+| [Changelog](CHANGELOG.md) | 3 versions |
 <!-- sdlc:auto:end contents -->
 
 ## Open gaps
@@ -161,7 +161,45 @@ Build a time and labour management web app for a company of up to 500 employees,
 
 ### Development
 
-- Development phase has not started: there is no sprint plan or implementation record.
+- No approver or approval date is recorded for plan v1.
+- The plan does not assign stories to specific sprints; the sprint-to-story mapping is only implied by the sprint goal text.
+- The EU/UK hosting region appears in the plan but not in the project description, and no rationale is given.
+- Only US-008 has a task breakdown. The other 32 stories have no tasks.
+- The qa-agent appears only on US-008-T4. No testing work is planned for any other story.
+- No development progress has been recorded for any sprint or story.
+- No sprint start or end dates are recorded.
+- The application is not built yet, so the user guide cannot be written. There is no confirmed functionality to document usage for.
+- Confirm the intended scale: 50 or 500 employees. This affects sizing, performance and the hosting work in Sprint 1.
+- The story-to-sprint assignment is inferred, not explicit in the plan.
+- US-031 also covers currency and language, but the goal names only time zone and date format. It is unclear whether currency and language are in this sprint.
+- US-001 depends on users existing, but user creation (US-002) is in Sprint 2. The plan does not say how first sign-in or admin bootstrap works.
+- The story-to-sprint assignment is inferred.
+- The goal mentions 'invite' links, which do not appear in any story title or in the project description. Their scope is unconfirmed.
+- The plan does not say how US-026 (5 points) and US-028 are split across sprints. US-028 covers approvals, which arrive in Sprint 4.
+- The Monday-to-Sunday week definition comes from the plan, not the project description. It is unconfirmed whether the week start is configurable.
+- Payroll Admin unlock (US-014) is not in the project description, which says only that approved sheets are locked. Confirm the requirement is approved.
+- The monthly accrual amount is not stated anywhere in the input.
+- If all six inferred stories belong here, the sprint is over capacity at 22 of 20 points. Confirm the scope, or confirm that part of US-026 was delivered in Sprint 3.
+- US-029 includes 'retention', but no retention period is stated in the input.
+- The plan does not define which screens count as the 'key employee screens' for mobile usability.
+- The epic has no assigned role or owner.
+- No frontend work (sign-in or user admin screens) is planned under this epic.
+- The epic has no assigned role.
+- No frontend story is planned for the admin screens.
+- Currency per project is not in the project description.
+- US-007 has no frontend task for the clock in/out UI.
+- US-008-T4 tests locking, which is delivered in Sprint 4 (US-014), but US-008 is inferred to be in Sprint 3.
+- No frontend work is planned for the manager approval screen.
+- The accrual rate per leave type is not specified.
+- No frontend work is planned for the leave request and balance screens.
+- The minimum break duration is not stated.
+- No frontend story is planned for the report screens.
+- The payroll export period definition and CSV column format are not specified.
+- The trigger timing for the 'timesheet due' alert is not specified.
+- The audit retention period is unspecified.
+- US-033 scopes 50 employees, which conflicts with the 500 in the project description (see DEV-DISCREPANCY-SCALE).
+- The specific data-protection controls in US-030 are not detailed.
+- The supported languages for US-031 are not listed.
 
 ### Testing
 
