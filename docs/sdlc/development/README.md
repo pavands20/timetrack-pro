@@ -3,332 +3,336 @@
 > Maintained by QuorQ AI SDLC. Text between `sdlc:auto` markers is regenerated; anything outside them is yours and is kept.
 
 <!-- sdlc:auto:start narrative -->
-### DEV-PLAN-V1 · approved · source: plan:v1
+### DEV-PLAN-V1 · approved · source: plan:version-1
 
-The development plan for TimeTrack Pro is approved at version 1. It covers 7 sprints of 20 points each, 10 epics and 33 stories (US-001 to US-033). Planned work totals 127 story points against 140 points of total sprint capacity.
+The delivery plan for TimeTrack Pro is approved at version 1. It has 7 sprints, each with capacity 20. The backlog holds 10 epics, 33 stories and 4 tasks under US-008.
 
 - Plan status: approved, version 1.
-- Sprints: 7 (Sprint 1 to Sprint 7), each with capacity 20, giving 140 total.
-- Epics: EPIC-001 to EPIC-010. No points are set on epics and none has an assigned role.
-- Stories: US-001 to US-033, totalling 127 points.
-- Tasks: only US-008 is broken down, into US-008-T1 to T4.
-- Points by assigned agent role:
-  - backend-agent: 23 stories, 91 points.
-  - frontend-agent: 7 stories, 19 points.
-  - security-agent: 1 story (US-004), 5 points.
-  - devops-agent: 2 stories (US-030, US-033), 8 points.
-  - qa-agent: no stories; one task only (US-008-T4).
-- Platform constraints stated in the plan (Sprint 1 goal): HTTPS-only, single-tenant, hosted in an EU/UK region.
+- Sprints: Sprint 1 to Sprint 7, capacity 20 each (140 total).
+- Backlog story points total 127 across US-001 to US-033.
+- Epics carry no points or assigned role.
+- Agent roles used: backend-agent, frontend-agent, security-agent, devops-agent, qa-agent.
+- Sprint-by-sprint goals are documented in entries DEV-SPRINT-1 to DEV-SPRINT-7.
 
-**Related:** EPIC-001, EPIC-002, EPIC-003, EPIC-004, EPIC-005, EPIC-006, EPIC-007, EPIC-008, EPIC-009, EPIC-010, SPRINT-1, SPRINT-2, SPRINT-3, SPRINT-4, SPRINT-5, SPRINT-6, SPRINT-7
+**Related:** EPIC-001, EPIC-002, EPIC-003, EPIC-004, EPIC-005, EPIC-006, EPIC-007, EPIC-008, EPIC-009, EPIC-010
 
-- ⚠ No approver or approval date is recorded for plan v1.
-- ⚠ The plan does not assign stories to specific sprints; the sprint-to-story mapping is only implied by the sprint goal text.
-- ⚠ The EU/UK hosting region appears in the plan but not in the project description, and no rationale is given.
-- ⚠ Only US-008 has a task breakdown. The other 32 stories have no tasks.
-- ⚠ The qa-agent appears only on US-008-T4. No testing work is planned for any other story.
+- ⚠ The plan has no approval date and no named approver.
+- ⚠ The input does not explicitly assign stories to sprints. Sprint scope can only be inferred from goal text.
+- ⚠ No sprint start or end dates are given.
 
-### DEV-EXECUTION-STATUS · draft
+### DEV-SPRINT-1 · approved · source: plan:Sprint 1
 
-No development execution has been recorded. There is no evidence of any ticket being started, completed, merged or demoed.
+Sprint 1 targets a deployable foundation. It covers an HTTPS-only single-tenant platform in an EU/UK region, email/password sign-in, and company settings. Capacity is 20.
 
-- The input contains only the plan: sprints, goals, items, points and roles.
-- There are no ticket statuses, commits, pull requests, build results, sprint start or end dates, velocities or sprint reviews.
-- None of the 33 stories can be documented as implemented.
-
-**Related:** DEV-PLAN-V1
-
-- ⚠ No development progress has been recorded for any sprint or story.
-- ⚠ No sprint start or end dates are recorded.
-- ⚠ The application is not built yet, so the user guide cannot be written. There is no confirmed functionality to document usage for.
-
-### DEV-DISCREPANCY-SCALE · draft · source: plan:US-033
-
-The planned deployment scale conflicts with the project description. US-033 says up to 50 employees; the description says up to 500.
-
-- Project description: 'a company of up to 500 employees'.
-- Plan item US-033: 'Single-tenant deployment for up to 50 employees' (5 points, devops-agent).
-- Both values are reported here as given. Neither has been chosen over the other.
-
-**Related:** US-033, EPIC-010
-
-- ⚠ Confirm the intended scale: 50 or 500 employees. This affects sizing, performance and the hosting work in Sprint 1.
-
-### SPRINT-1 · approved · source: plan:Sprint 1
-
-Platform foundation sprint. The goal is a deployable, secure single-tenant platform with sign-in and company settings.
-
-- Goal: Deployable, HTTPS-only single-tenant platform in an EU/UK region with email/password sign-in and company settings (time zone, date format, labour rules).
+- Goal: deployable, HTTPS-only single-tenant platform in an EU/UK region with email/password sign-in and company settings (time zone, date format, labour rules).
 - Capacity: 20.
-- Stories implied by the goal (inferred):
-  - US-001 Sign in (5)
-  - US-019 Configure labour rules (2)
-  - US-030 Protect personal data (3)
-  - US-031 Company time zone, date format, currency and language (3)
-  - US-033 Single-tenant deployment (5)
-- Inferred total: 18 points.
+- Related stories inferred from the goal text:
+  - US-001 (5 pts)
+  - US-019 (2 pts)
+  - US-030 (3 pts)
+  - US-031 (3 pts)
+  - US-033 (5 pts)
+  - Total: 18 pts.
+- These five stories match the ticket set in the development run exactly.
+- Run outcome:
+  - US-001, US-019 and US-031 were delivered.
+  - US-030 and US-033 were skipped.
 
 **Related:** US-001, US-019, US-030, US-031, US-033
 
-- ⚠ The story-to-sprint assignment is inferred, not explicit in the plan.
-- ⚠ US-031 also covers currency and language, but the goal names only time zone and date format. It is unclear whether currency and language are in this sprint.
-- ⚠ US-001 depends on users existing, but user creation (US-002) is in Sprint 2. The plan does not say how first sign-in or admin bootstrap works.
+- ⚠ The 'deployable, HTTPS-only, EU/UK region' part of the goal depends on US-033 and US-030, which were both skipped. The sprint goal is therefore not met as stated.
+- ⚠ The story-to-sprint mapping is inferred, not stated in the input.
 
-### SPRINT-2 · approved · source: plan:Sprint 2
+### DEV-SPRINT-2 · approved · source: plan:Sprint 2
 
-User administration and project setup sprint. Covers user creation, manager assignment, invite and reset links, role scoping, and clients, projects, tasks and bill rates.
+Sprint 2 targets user administration, role-based data scoping, and maintenance of clients, projects, tasks and bill rates. Capacity is 20.
 
-- Goal: Admins can create users, assign managers and send invite/reset links; role-based data scoping is enforced; clients, projects, tasks and bill rates are maintained.
+- Goal: admins can create users, assign managers and send invite/reset links. Role-based data scoping is enforced. Clients, projects, tasks and bill rates are maintained.
 - Capacity: 20.
-- Stories implied by the goal (inferred):
-  - US-002 (5)
-  - US-003 (2)
-  - US-004 (5)
-  - US-005 (5)
-  - US-006 (2)
-- Inferred total: 19 points.
+- Related stories inferred from the goal text:
+  - US-002 (5 pts)
+  - US-003 (2 pts)
+  - US-004 (5 pts, security-agent)
+  - US-005 (5 pts)
+  - US-006 (2 pts)
+  - Total: 19 pts.
 
 **Related:** US-002, US-003, US-004, US-005, US-006
 
-- ⚠ The story-to-sprint assignment is inferred.
-- ⚠ The goal mentions 'invite' links, which do not appear in any story title or in the project description. Their scope is unconfirmed.
+- ⚠ No development ticket or commit is recorded for any Sprint 2 story.
+- ⚠ The story-to-sprint mapping is inferred, not stated in the input.
 
-### SPRINT-3 · approved · source: plan:Sprint 3
+### DEV-SPRINT-3 · approved · source: plan:Sprint 3
 
-Weekly timesheet sprint. Covers the Monday-to-Sunday timesheet charged to project and task, an audit record for every entry change, and the notification store.
+Sprint 3 targets the Monday-to-Sunday weekly timesheet charged to project and task. It also covers audit of every entry change and the notification store. Capacity is 20.
 
-- Goal: Employees fill a Monday-to-Sunday weekly timesheet charged to project and task, every entry change is audited, and the notification store is in place.
+- Goal: employees fill a Monday-to-Sunday weekly timesheet charged to project and task. Every entry change is audited. The notification store is in place.
 - Capacity: 20.
-- Stories implied by the goal (inferred):
-  - US-008 (8), with tasks T1 to T4
-  - US-009 (3)
-  - US-028 (5)
-- Inferred total: 16 points.
-- A 'notification store' is also planned. It appears to be part of US-026, whose alerts are delivered in Sprint 6.
+- Related stories inferred from the goal text:
+  - US-008 (8 pts)
+  - US-009 (3 pts)
+  - US-028 (5 pts)
+  - Possibly the store portion of US-026.
+- US-008 is broken into four tasks:
+  - T1: add timesheet, time entry and break tables (backend-agent).
+  - T2: implement week and entry endpoints (backend-agent).
+  - T3: build weekly timesheet grid (frontend-agent).
+  - T4: add API test suite for timesheet editing and locking (qa-agent).
 
 **Related:** US-008, US-008-T1, US-008-T2, US-008-T3, US-008-T4, US-009, US-028, US-026
 
-- ⚠ The story-to-sprint assignment is inferred.
-- ⚠ The plan does not say how US-026 (5 points) and US-028 are split across sprints. US-028 covers approvals, which arrive in Sprint 4.
-- ⚠ The Monday-to-Sunday week definition comes from the plan, not the project description. It is unconfirmed whether the week start is configurable.
+- ⚠ No development ticket or commit is recorded for any Sprint 3 story or task.
+- ⚠ It is unclear whether US-026 is split across Sprint 3 (store) and Sprint 6 (alerts).
+- ⚠ US-008 tasks have no points.
+- ⚠ The story-to-sprint mapping is inferred, not stated in the input.
 
-### SPRINT-4 · approved · source: plan:Sprint 4
+### DEV-SPRINT-4 · approved · source: plan:Sprint 4
 
-Clock in/out and approval lifecycle sprint. Covers clock in/out with breaks and the full approval flow: submit, approve or reject, resubmit, lock and unlock.
+Sprint 4 targets clock in/out with breaks and the full timesheet approval lifecycle. Capacity is 20.
 
-- Goal: Clock in/out with breaks and the full timesheet approval lifecycle: submit, approve/reject with comment, resubmit, lock and Payroll Admin unlock.
+- Goal: clock in/out with breaks and the full timesheet approval lifecycle: submit, approve/reject with comment, resubmit, lock, and Payroll Admin unlock.
 - Capacity: 20.
-- Stories implied by the goal (inferred):
-  - US-007 (5)
-  - US-011 (3)
-  - US-012 (5)
-  - US-013 (2)
-  - US-014 (3)
-- Inferred total: 18 points.
+- Related stories inferred from the goal text:
+  - US-007 (5 pts)
+  - US-011 (3 pts)
+  - US-012 (5 pts)
+  - US-013 (2 pts)
+  - US-014 (3 pts)
+  - Total: 18 pts.
 
 **Related:** US-007, US-011, US-012, US-013, US-014
 
-- ⚠ The story-to-sprint assignment is inferred.
-- ⚠ Payroll Admin unlock (US-014) is not in the project description, which says only that approved sheets are locked. Confirm the requirement is approved.
+- ⚠ No development ticket or commit is recorded for any Sprint 4 story.
+- ⚠ The story-to-sprint mapping is inferred, not stated in the input.
 
-### SPRINT-5 · approved · source: plan:Sprint 5
+### DEV-SPRINT-5 · approved · source: plan:Sprint 5
 
-Time off and compliance flags sprint. Covers leave requests, decisions, accrual, leave shown on the timesheet, and overtime and missed-break flags.
+Sprint 5 targets leave requests and decisions, monthly accrual and balances, leave shown on the timesheet, and overtime and missed-break flags. Capacity is 20.
 
-- Goal: Leave requests, manager decisions, monthly accrual and balances, leave shown on the timesheet, and overtime and missed-break flags.
+- Goal: leave requests, manager decisions, monthly accrual and balances, leave shown on the timesheet, and overtime and missed-break flags.
 - Capacity: 20.
-- Stories implied by the goal (inferred):
-  - US-015 (3)
-  - US-016 (3)
-  - US-017 (5)
-  - US-018 (2)
-  - US-020 (5)
-- Inferred total: 18 points.
+- Related stories inferred from the goal text:
+  - US-015 (3 pts)
+  - US-016 (3 pts)
+  - US-017 (5 pts)
+  - US-018 (2 pts)
+  - US-020 (5 pts)
+  - Total: 18 pts.
 
 **Related:** US-015, US-016, US-017, US-018, US-020
 
-- ⚠ The story-to-sprint assignment is inferred.
-- ⚠ The monthly accrual amount is not stated anywhere in the input.
+- ⚠ No development ticket or commit is recorded for any Sprint 5 story.
+- ⚠ The story-to-sprint mapping is inferred, not stated in the input.
 
-### SPRINT-6 · approved · source: plan:Sprint 6
+### DEV-SPRINT-6 · approved · source: plan:Sprint 6
 
-Alerts, dashboard, core reports and audit viewing sprint.
+Sprint 6 targets in-app alerts, the employee dashboard, hours and billable reports with CSV export, and audit history viewing. Capacity is 20.
 
-- Goal: In-app alerts, employee dashboard, hours and billable reports with CSV export, and audit history viewing.
+- Goal: in-app alerts, employee dashboard, hours and billable reports with CSV export, and audit history viewing.
 - Capacity: 20.
-- Stories implied by the goal (inferred):
-  - US-026 (5)
-  - US-027 (3)
-  - US-010 (3)
-  - US-022 (5)
-  - US-023 (3)
-  - US-029 (3)
-- Inferred total: 22 points, which exceeds the 20-point capacity.
+- Related stories inferred from the goal text:
+  - US-026 (5 pts)
+  - US-027 (3 pts)
+  - US-010 (3 pts)
+  - US-022 (5 pts)
+  - US-023 (3 pts)
+  - US-029 (3 pts)
+  - Total: 22 pts, which exceeds capacity 20 if all are assigned here.
 
-**Related:** US-010, US-022, US-023, US-026, US-027, US-029
+**Related:** US-026, US-027, US-010, US-022, US-023, US-029
 
-- ⚠ The story-to-sprint assignment is inferred.
-- ⚠ If all six inferred stories belong here, the sprint is over capacity at 22 of 20 points. Confirm the scope, or confirm that part of US-026 was delivered in Sprint 3.
-- ⚠ US-029 includes 'retention', but no retention period is stated in the input.
+- ⚠ The inferred scope (22 pts) exceeds sprint capacity (20). The actual assignment needs confirmation.
+- ⚠ No development ticket or commit is recorded for any Sprint 6 story.
 
-### SPRINT-7 · approved · source: plan:Sprint 7
+### DEV-SPRINT-7 · approved · source: plan:Sprint 7
 
-Remaining reports and exports sprint, plus mobile-browser usability for key employee screens.
+Sprint 7 targets compliance, overtime, leave-taken and payroll CSV exports, plus mobile-browser usability on key employee screens. Capacity is 20.
 
-- Goal: Compliance, overtime, leave-taken and payroll CSV exports, plus mobile-browser usability across the key employee screens.
+- Goal: compliance, overtime, leave-taken and payroll CSV exports, plus mobile-browser usability across the key employee screens.
 - Capacity: 20.
-- Stories implied by the goal (inferred):
-  - US-021 (5)
-  - US-024 (5)
-  - US-025 (3)
-  - US-032 (3)
-- Inferred total: 16 points.
+- Related stories inferred from the goal text:
+  - US-021 (5 pts)
+  - US-024 (5 pts)
+  - US-025 (3 pts)
+  - US-032 (3 pts)
+  - Total: 16 pts.
 
 **Related:** US-021, US-024, US-025, US-032
 
-- ⚠ The story-to-sprint assignment is inferred.
-- ⚠ The plan does not define which screens count as the 'key employee screens' for mobile usability.
+- ⚠ No development ticket or commit is recorded for any Sprint 7 story.
+- ⚠ The story-to-sprint mapping is inferred, not stated in the input.
 
-### EPIC-001 · approved · source: plan:EPIC-001
+### DEV-BACKLOG · approved · source: plan:version-1
 
-Users, roles and sign-in. Four stories, 17 points.
+The backlog is grouped into 10 epics. This entry lists each epic with its stories, points and assigned agent role, as given in the plan.
 
-- US-001 Sign in with email and password: 5 points, backend-agent.
-- US-002 Admin creates user accounts and assigns a manager: 5 points, backend-agent.
-- US-003 Admin-initiated password reset: 2 points, backend-agent.
-- US-004 Role-based access to data: 5 points, security-agent.
+- EPIC-001 Users, roles and sign-in:
+  - US-001 Sign in with email and password (5, backend-agent)
+  - US-002 Admin creates user accounts and assigns a manager (5, backend-agent)
+  - US-003 Admin-initiated password reset (2, backend-agent)
+  - US-004 Role-based access to data (5, security-agent)
+- EPIC-002 Clients, projects and tasks:
+  - US-005 Maintain clients, projects and tasks (5, backend-agent)
+  - US-006 Hourly bill rate per project and currency (2, backend-agent)
+- EPIC-003 Time tracking:
+  - US-007 Clock in and out with breaks (5, backend-agent)
+  - US-008 Weekly timesheet entry by day (8, backend-agent), with tasks T1 to T4
+  - US-009 Charge each entry to a project and task and mark billable (3, frontend-agent)
+  - US-010 Employee dashboard of own hours this week (3, frontend-agent)
+- EPIC-004 Timesheet approval:
+  - US-011 Submit a weekly timesheet (3, backend-agent)
+  - US-012 Manager approves or rejects with a comment (5, backend-agent)
+  - US-013 Edit and resubmit a rejected timesheet (2, frontend-agent)
+  - US-014 Approved timesheets are locked; Payroll Admin can unlock (3, backend-agent)
+- EPIC-005 Time off:
+  - US-015 Request leave (3, backend-agent)
+  - US-016 Manager decides leave requests (3, backend-agent)
+  - US-017 Leave balance with monthly accrual (5, backend-agent)
+  - US-018 Approved leave shown on the timesheet (2, frontend-agent)
+- EPIC-006 Labour rules and compliance flags:
+  - US-019 Configure labour rules (2, backend-agent)
+  - US-020 Flag overtime and missed breaks on the timesheet (5, backend-agent)
+  - US-021 Compliance report (5, backend-agent)
+- EPIC-007 Reports and CSV export:
+  - US-022 Hours report by employee, project and week (5, backend-agent)
+  - US-023 Billable versus non-billable report (3, backend-agent)
+  - US-024 Overtime and leave taken reports (5, backend-agent)
+  - US-025 Payroll export of approved hours (3, backend-agent)
+- EPIC-008 In-app notifications:
+  - US-026 Receive in-app alerts (5, backend-agent)
+  - US-027 View and clear notifications (3, frontend-agent)
+- EPIC-009 Audit trail:
+  - US-028 Record changes and approvals of timesheets (5, backend-agent)
+  - US-029 View audit history and retention (3, frontend-agent)
+- EPIC-010 Data protection, localisation and platform:
+  - US-030 Protect personal data (3, devops-agent)
+  - US-031 Company time zone, date format, currency and language (3, frontend-agent)
+  - US-032 Use the web app on a mobile browser (3, frontend-agent)
+  - US-033 Single-tenant deployment for up to 50 employees (5, devops-agent)
 
-**Related:** US-001, US-002, US-003, US-004
+**Related:** EPIC-001, EPIC-002, EPIC-003, EPIC-004, EPIC-005, EPIC-006, EPIC-007, EPIC-008, EPIC-009, EPIC-010
 
-- ⚠ The epic has no assigned role or owner.
-- ⚠ No frontend work (sign-in or user admin screens) is planned under this epic.
+- ⚠ US-006 and US-031 mention currency, and US-031 mentions language. The project description does not specify currency or language requirements, so their scope needs confirming against the requirements phase.
+- ⚠ US-029 mentions audit retention. No retention period is given in the input.
 
-### EPIC-002 · approved · source: plan:EPIC-002
+### DEV-RUN · draft · source: dev:run
 
-Clients, projects and tasks. Two stories, 7 points.
+The development run is marked completed but covers only 5 of 33 stories. Three were delivered in a single commit and two were skipped.
 
-- US-005 Maintain clients, projects and tasks: 5 points, backend-agent.
-- US-006 Hourly bill rate per project and currency: 2 points, backend-agent.
+- Run status: completed.
+- Delivered (commit 91d46dd01f1bb680628c0a1dd59ecf7e8b08b726):
+  - US-001
+  - US-019
+  - US-031
+- Skipped (no commit):
+  - US-030
+  - US-033
+- No tickets are recorded for the other 28 stories (US-002 to US-018, US-020 to US-029, US-032) or for tasks US-008-T1 to T4.
 
-**Related:** US-005, US-006
+**Related:** US-001, US-019, US-030, US-031, US-033
 
-- ⚠ The epic has no assigned role.
-- ⚠ No frontend story is planned for the admin screens.
-- ⚠ Currency per project is not in the project description.
+- ⚠ DISCREPANCY: the run is 'completed', yet the approved plan spans 7 sprints and 33 stories. It is unclear whether this run represents Sprint 1 only or the whole plan.
+- ⚠ There is no run date, no reviewer, and no acceptance or merge record for the delivered commit.
+- ⚠ No reason is recorded for skipping US-030 and US-033.
 
-### EPIC-003 · approved · source: plan:EPIC-003
+### US-001 · draft · source: dev:US-001
 
-Time tracking. Four stories, 19 points. This is the only epic with a task breakdown.
+Sign in with email and password. The ticket is delivered in commit 91d46dd.
 
-- US-007 Clock in and out with breaks: 5 points, backend-agent.
-- US-008 Weekly timesheet entry by day: 8 points, backend-agent. Tasks:
-  - T1 Add timesheet, time entry and break tables (backend-agent).
-  - T2 Implement week and entry endpoints (backend-agent).
-  - T3 Build weekly timesheet grid (frontend-agent).
-  - T4 Add API test suite for timesheet editing and locking (qa-agent).
-- US-009 Charge each entry to a project and task and mark billable: 3 points, frontend-agent.
-- US-010 Employee dashboard of own hours this week: 3 points, frontend-agent.
+- Ticket: US-001 Sign in with email and password.
+- Status: delivered.
+- Commit: 91d46dd01f1bb680628c0a1dd59ecf7e8b08b726 (shared with US-019 and US-031).
+- Planned: 5 pts, backend-agent.
 
-**Related:** US-007, US-008, US-008-T1, US-008-T2, US-008-T3, US-008-T4, US-009, US-010
+**Related:** EPIC-001, DEV-SPRINT-1
 
-- ⚠ The epic has no assigned role.
-- ⚠ US-007 has no frontend task for the clock in/out UI.
-- ⚠ US-008-T4 tests locking, which is delivered in Sprint 4 (US-014), but US-008 is inferred to be in Sprint 3.
+- ⚠ No implementation details are provided, such as session handling, password policy or lockout.
+- ⚠ No test evidence or acceptance record exists.
 
-### EPIC-004 · approved · source: plan:EPIC-004
+### US-019 · draft · source: dev:US-019
 
-Timesheet approval. Four stories, 13 points.
+Configure labour rules: daily and weekly overtime limits and minimum break after 6 hours. The ticket is delivered in commit 91d46dd.
 
-- US-011 Submit a weekly timesheet: 3 points, backend-agent.
-- US-012 Manager approves or rejects with a comment: 5 points, backend-agent.
-- US-013 Edit and resubmit a rejected timesheet: 2 points, frontend-agent.
-- US-014 Approved timesheets are locked; Payroll Admin can unlock: 3 points, backend-agent.
+- Ticket: US-019 Configure labour rules.
+- Status: delivered.
+- Commit: 91d46dd01f1bb680628c0a1dd59ecf7e8b08b726.
+- Planned: 2 pts, backend-agent.
+- Per the project description, the rules are daily and weekly overtime limits (example 8 h/day, 40 h/week) and a minimum break after 6 hours.
 
-**Related:** US-011, US-012, US-013, US-014
+**Related:** EPIC-006, DEV-SPRINT-1, US-020, US-021
 
-- ⚠ The epic has no assigned role.
-- ⚠ No frontend work is planned for the manager approval screen.
+- ⚠ It is not stated which settings were actually implemented, or what the default values are.
+- ⚠ The flagging of overtime and missed breaks (US-020) and the compliance report (US-021) that consume these rules have no recorded development.
 
-### EPIC-005 · approved · source: plan:EPIC-005
+### US-030 · draft · source: dev:US-030
 
-Time off. Four stories, 13 points.
+Protect personal data. The ticket was skipped and has no commit.
 
-- US-015 Request leave: 3 points, backend-agent.
-- US-016 Manager decides leave requests: 3 points, backend-agent.
-- US-017 Leave balance with monthly accrual: 5 points, backend-agent.
-- US-018 Approved leave shown on the timesheet: 2 points, frontend-agent.
+- Ticket: US-030 Protect personal data.
+- Status: skipped.
+- Commit: none.
+- Planned: 3 pts, devops-agent.
 
-**Related:** US-015, US-016, US-017, US-018
+**Related:** EPIC-010, DEV-SPRINT-1
 
-- ⚠ The epic has no assigned role.
-- ⚠ The accrual rate per leave type is not specified.
-- ⚠ No frontend work is planned for the leave request and balance screens.
+- ⚠ No reason is recorded for the skip.
+- ⚠ The Sprint 1 'HTTPS-only' goal is unmet if this story carries it.
+- ⚠ It is unknown whether this story was rescheduled or descoped.
 
-### EPIC-006 · approved · source: plan:EPIC-006
+### US-031 · draft · source: dev:US-031
 
-Labour rules and compliance flags. Three stories, 12 points.
+Company time zone, date format, currency and language settings. The ticket is delivered in commit 91d46dd.
 
-- US-019 Configure labour rules: 2 points, backend-agent. Example limits from the description: 8 h per day, 40 h per week, and a minimum break after 6 hours.
-- US-020 Flag overtime and missed breaks on the timesheet: 5 points, backend-agent.
-- US-021 Compliance report: 5 points, backend-agent.
+- Ticket: US-031 Company time zone, date format, currency and language.
+- Status: delivered.
+- Commit: 91d46dd01f1bb680628c0a1dd59ecf7e8b08b726.
+- Planned: 3 pts, frontend-agent.
 
-**Related:** US-019, US-020, US-021
+**Related:** EPIC-010, DEV-SPRINT-1, US-006
 
-- ⚠ The epic has no assigned role.
-- ⚠ The minimum break duration is not stated.
+- ⚠ The supported languages, currencies and date formats are not stated.
+- ⚠ No test evidence exists.
 
-### EPIC-007 · approved · source: plan:EPIC-007
+### US-033 · draft · source: dev:US-033
 
-Reports and CSV export. Four stories, 16 points.
+Single-tenant deployment for up to 50 employees. The ticket was skipped and has no commit.
 
-- US-022 Hours report by employee, project and week: 5 points, backend-agent.
-- US-023 Billable versus non-billable report: 3 points, backend-agent.
-- US-024 Overtime and leave taken reports: 5 points, backend-agent.
-- US-025 Payroll export of approved hours: 3 points, backend-agent.
+- Ticket: US-033 Single-tenant deployment for up to 50 employees.
+- Status: skipped.
+- Commit: none.
+- Planned: 5 pts, devops-agent.
 
-**Related:** US-022, US-023, US-024, US-025
+**Related:** EPIC-010, DEV-SPRINT-1
 
-- ⚠ The epic has no assigned role.
-- ⚠ No frontend story is planned for the report screens.
-- ⚠ The payroll export period definition and CSV column format are not specified.
+- ⚠ DISCREPANCY: the project description says the app is for a company of up to 500 employees, but US-033 says up to 50 employees. Confirm the intended scale.
+- ⚠ No reason is recorded for the skip.
+- ⚠ The Sprint 1 goal of a deployable EU/UK-region platform is unmet.
 
-### EPIC-008 · approved · source: plan:EPIC-008
+### DEV-NOT-STARTED · draft
 
-In-app notifications. Two stories, 8 points.
+28 planned stories have no development ticket, commit or status in the run input. The core time-tracking, approval, leave, reporting, notification and audit features are not confirmed as built.
 
-- US-026 Receive in-app alerts (timesheet due, approved or rejected, leave request decided): 5 points, backend-agent.
-- US-027 View and clear notifications: 3 points, frontend-agent.
+- Stories with no development record:
+  - US-002 to US-018
+  - US-020 to US-029
+  - US-032
+- US-008 tasks T1 to T4 also have no development record.
+- Features affected:
+  - User administration
+  - Role-based access
+  - Projects and bill rates
+  - Clock in/out
+  - Weekly timesheet
+  - Approval workflow
+  - Leave
+  - Overtime and break flags
+  - All reports and CSV exports
+  - Notifications
+  - Audit trail
+  - Mobile browser usability
 
-**Related:** US-026, US-027
+**Related:** US-002, US-003, US-004, US-005, US-006, US-007, US-008, US-009, US-010, US-011, US-012, US-013, US-014, US-015, US-016, US-017, US-018, US-020, US-021, US-022, US-023, US-024, US-025, US-026, US-027, US-028, US-029, US-032
 
-- ⚠ The epic has no assigned role.
-- ⚠ The trigger timing for the 'timesheet due' alert is not specified.
-
-### EPIC-009 · approved · source: plan:EPIC-009
-
-Audit trail. Two stories, 8 points.
-
-- US-028 Record changes and approvals of timesheets (who and when): 5 points, backend-agent.
-- US-029 View audit history and retention: 3 points, frontend-agent.
-
-**Related:** US-028, US-029
-
-- ⚠ The epic has no assigned role.
-- ⚠ The audit retention period is unspecified.
-
-### EPIC-010 · approved · source: plan:EPIC-010
-
-Data protection, localisation and platform. Four stories, 14 points.
-
-- US-030 Protect personal data: 3 points, devops-agent.
-- US-031 Company time zone, date format, currency and language: 3 points, frontend-agent.
-- US-032 Use the web app on a mobile browser: 3 points, frontend-agent.
-- US-033 Single-tenant deployment for up to 50 employees: 5 points, devops-agent.
-
-**Related:** US-030, US-031, US-032, US-033, DEV-DISCREPANCY-SCALE
-
-- ⚠ The epic has no assigned role.
-- ⚠ US-033 scopes 50 employees, which conflicts with the 500 in the project description (see DEV-DISCREPANCY-SCALE).
-- ⚠ The specific data-protection controls in US-030 are not detailed.
-- ⚠ The supported languages for US-031 are not listed.
+- ⚠ Development status is unknown for all of these stories. Do not treat them as built.
+- ⚠ Only sign-in, labour-rule configuration and company settings are recorded as delivered. User-facing documentation can therefore cover only those areas.
 <!-- sdlc:auto:end narrative -->

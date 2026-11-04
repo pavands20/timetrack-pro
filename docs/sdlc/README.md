@@ -23,7 +23,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 ▎
 ▎ Audit: record who changed or approved any timesheet, and when.
 
-**Documentation version:** v4
+**Documentation version:** v5
 <!-- sdlc:auto:end overview -->
 
 ## Contents
@@ -33,7 +33,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 |---|---|
 | [Requirements](requirements/README.md) | v1 approved |
 | [Architecture](architecture/README.md) | 32 entries |
-| [Development](development/README.md) | 20 entries |
+| [Development](development/README.md) | 16 entries |
 | [Testing](testing/README.md) | 1 entry |
 | [Deployment](deployment/README.md) | 3 entries |
 | [Maintenance](maintenance/README.md) | 1 entry |
@@ -42,14 +42,14 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [Decisions (ADRs)](architecture/adr/README.md) | 4 decisions |
 | [Sprint plan](development/sprint-plan.md) | 7 sprints |
 | [Developer guide](development/developer-guide.md) | generated |
-| [API reference](development/api-reference.md) | 1 route |
+| [API reference](development/api-reference.md) | 6 routes |
 | [Test report](testing/test-report.md) | not run yet |
-| [Tests](testing/test-cases.md) | 0 tests |
+| [Tests](testing/test-cases.md) | 4 tests |
 | [Deployment guide](deployment/deployment-guide.md) | deployed |
 | [Runbook](deployment/runbook.md) | deployed |
 | [Release notes](deployment/release-notes.md) | 1 release |
 | [Traceability matrix](traceability-matrix.md) | 33 requirements |
-| [Changelog](CHANGELOG.md) | 4 versions |
+| [Changelog](CHANGELOG.md) | 5 versions |
 <!-- sdlc:auto:end contents -->
 
 ## Open gaps
@@ -161,45 +161,38 @@ Build a time and labour management web app for a company of up to 500 employees,
 
 ### Development
 
-- No approver or approval date is recorded for plan v1.
-- The plan does not assign stories to specific sprints; the sprint-to-story mapping is only implied by the sprint goal text.
-- The EU/UK hosting region appears in the plan but not in the project description, and no rationale is given.
-- Only US-008 has a task breakdown. The other 32 stories have no tasks.
-- The qa-agent appears only on US-008-T4. No testing work is planned for any other story.
-- No development progress has been recorded for any sprint or story.
-- No sprint start or end dates are recorded.
-- The application is not built yet, so the user guide cannot be written. There is no confirmed functionality to document usage for.
-- Confirm the intended scale: 50 or 500 employees. This affects sizing, performance and the hosting work in Sprint 1.
-- The story-to-sprint assignment is inferred, not explicit in the plan.
-- US-031 also covers currency and language, but the goal names only time zone and date format. It is unclear whether currency and language are in this sprint.
-- US-001 depends on users existing, but user creation (US-002) is in Sprint 2. The plan does not say how first sign-in or admin bootstrap works.
-- The story-to-sprint assignment is inferred.
-- The goal mentions 'invite' links, which do not appear in any story title or in the project description. Their scope is unconfirmed.
-- The plan does not say how US-026 (5 points) and US-028 are split across sprints. US-028 covers approvals, which arrive in Sprint 4.
-- The Monday-to-Sunday week definition comes from the plan, not the project description. It is unconfirmed whether the week start is configurable.
-- Payroll Admin unlock (US-014) is not in the project description, which says only that approved sheets are locked. Confirm the requirement is approved.
-- The monthly accrual amount is not stated anywhere in the input.
-- If all six inferred stories belong here, the sprint is over capacity at 22 of 20 points. Confirm the scope, or confirm that part of US-026 was delivered in Sprint 3.
-- US-029 includes 'retention', but no retention period is stated in the input.
-- The plan does not define which screens count as the 'key employee screens' for mobile usability.
-- The epic has no assigned role or owner.
-- No frontend work (sign-in or user admin screens) is planned under this epic.
-- The epic has no assigned role.
-- No frontend story is planned for the admin screens.
-- Currency per project is not in the project description.
-- US-007 has no frontend task for the clock in/out UI.
-- US-008-T4 tests locking, which is delivered in Sprint 4 (US-014), but US-008 is inferred to be in Sprint 3.
-- No frontend work is planned for the manager approval screen.
-- The accrual rate per leave type is not specified.
-- No frontend work is planned for the leave request and balance screens.
-- The minimum break duration is not stated.
-- No frontend story is planned for the report screens.
-- The payroll export period definition and CSV column format are not specified.
-- The trigger timing for the 'timesheet due' alert is not specified.
-- The audit retention period is unspecified.
-- US-033 scopes 50 employees, which conflicts with the 500 in the project description (see DEV-DISCREPANCY-SCALE).
-- The specific data-protection controls in US-030 are not detailed.
-- The supported languages for US-031 are not listed.
+- The plan has no approval date and no named approver.
+- The input does not explicitly assign stories to sprints. Sprint scope can only be inferred from goal text.
+- No sprint start or end dates are given.
+- The 'deployable, HTTPS-only, EU/UK region' part of the goal depends on US-033 and US-030, which were both skipped. The sprint goal is therefore not met as stated.
+- The story-to-sprint mapping is inferred, not stated in the input.
+- No development ticket or commit is recorded for any Sprint 2 story.
+- No development ticket or commit is recorded for any Sprint 3 story or task.
+- It is unclear whether US-026 is split across Sprint 3 (store) and Sprint 6 (alerts).
+- US-008 tasks have no points.
+- No development ticket or commit is recorded for any Sprint 4 story.
+- No development ticket or commit is recorded for any Sprint 5 story.
+- The inferred scope (22 pts) exceeds sprint capacity (20). The actual assignment needs confirmation.
+- No development ticket or commit is recorded for any Sprint 6 story.
+- No development ticket or commit is recorded for any Sprint 7 story.
+- US-006 and US-031 mention currency, and US-031 mentions language. The project description does not specify currency or language requirements, so their scope needs confirming against the requirements phase.
+- US-029 mentions audit retention. No retention period is given in the input.
+- DISCREPANCY: the run is 'completed', yet the approved plan spans 7 sprints and 33 stories. It is unclear whether this run represents Sprint 1 only or the whole plan.
+- There is no run date, no reviewer, and no acceptance or merge record for the delivered commit.
+- No reason is recorded for skipping US-030 and US-033.
+- No implementation details are provided, such as session handling, password policy or lockout.
+- No test evidence or acceptance record exists.
+- It is not stated which settings were actually implemented, or what the default values are.
+- The flagging of overtime and missed breaks (US-020) and the compliance report (US-021) that consume these rules have no recorded development.
+- No reason is recorded for the skip.
+- The Sprint 1 'HTTPS-only' goal is unmet if this story carries it.
+- It is unknown whether this story was rescheduled or descoped.
+- The supported languages, currencies and date formats are not stated.
+- No test evidence exists.
+- DISCREPANCY: the project description says the app is for a company of up to 500 employees, but US-033 says up to 50 employees. Confirm the intended scale.
+- The Sprint 1 goal of a deployable EU/UK-region platform is unmet.
+- Development status is unknown for all of these stories. Do not treat them as built.
+- Only sign-in, labour-rule configuration and company settings are recorded as delivered. User-facing documentation can therefore cover only those areas.
 
 ### Testing
 

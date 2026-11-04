@@ -9,7 +9,7 @@ Built from recorded links, not written by a model: requirement key → plan item
 <!-- sdlc:auto:start matrix -->
 | Requirement | Epic | Title | Plan items | Sprint | Design | Code | Commits | Ticket | Tests | AC tests | Deployed |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| US-001 | EPIC-001 | Sign in with email and password | US-001 | 1 | GET /api/auth/me, POST /api/auth/login, POST /api/auth/logout, api, db, user_roles, users, web_ui | — | — | not started | not run | 0/4 tested · 0/4 passing | — |
+| US-001 | EPIC-001 | Sign in with email and password | US-001 | 1 | GET /api/auth/me, POST /api/auth/login, POST /api/auth/logout, api, db, user_roles, users, web_ui | backend/app/deps.py, backend/app/main.py, backend/app/models.py, backend/app/routers/auth.py | 91d46dd | delivered | not run | 0/4 tested · 0/4 passing | — |
 | US-002 | EPIC-001 | Admin creates user accounts and assigns a manager | US-002 | 2 | GET /api/users, PATCH /api/users/{id}, POST /api/auth/set-password, POST /api/users, api, auth_tokens, db, email, user_roles, users, web_ui | — | — | not started | not run | 0/5 tested · 0/5 passing | — |
 | US-003 | EPIC-001 | Admin-initiated password reset | US-003 | 2 | POST /api/auth/set-password, POST /api/users/{id}/password-reset, api, auth_tokens, email, users | — | — | not started | not run | 0/2 tested · 0/2 passing | — |
 | US-004 | EPIC-001 | Role-based access to data | US-004 | 2 | GET /api/auth/me, api, user_roles, users | — | — | not started | not run | 0/4 tested · 0/4 passing | — |
@@ -27,7 +27,7 @@ Built from recorded links, not written by a model: requirement key → plan item
 | US-016 | EPIC-005 | Manager decides leave requests | US-016 | 5 | GET /api/leave/requests, POST /api/leave/requests/{id}/decide, api, leave_ledger, leave_requests, notifications, web_ui | — | — | not started | not run | 0/3 tested · 0/3 passing | — |
 | US-017 | EPIC-005 | Leave balance with monthly accrual | US-017 | 5 | GET /api/leave/balances, PUT /api/settings, api, leave_ledger, leave_requests, leave_types, scheduler, web_ui | — | — | not started | not run | 0/4 tested · 0/4 passing | — |
 | US-018 | EPIC-005 | Approved leave shown on the timesheet | US-018 | 5 | GET /api/timesheets/week, api, leave_requests, timesheets, web_ui | — | — | not started | not run | 0/2 tested · 0/2 passing | — |
-| US-019 | EPIC-006 | Configure labour rules | US-019 | 1 | GET /api/settings, PUT /api/settings, api, company_settings, web_ui | — | — | not started | not run | 0/3 tested · 0/3 passing | — |
+| US-019 | EPIC-006 | Configure labour rules | US-019 | 1 | GET /api/settings, PUT /api/settings, api, company_settings, web_ui | — | 91d46dd | delivered | not run | 0/3 tested · 0/3 passing | — |
 | US-020 | EPIC-006 | Flag overtime and missed breaks on the timesheet | US-020 | 5 | GET /api/timesheets/week, api, company_settings, entry_breaks, time_entries, web_ui | — | — | not started | not run | 0/4 tested · 0/4 passing | — |
 | US-021 | EPIC-006 | Compliance report | US-021 | 7 | api, company_settings, entry_breaks, time_entries, web_ui | — | — | not started | not run | 0/2 tested · 0/2 passing | — |
 | US-022 | EPIC-007 | Hours report by employee, project and week | US-022 | 6 | GET /api/reports/hours, api, projects, time_entries, timesheets, users, web_ui | — | — | not started | not run | 0/2 tested · 0/2 passing | — |
@@ -38,8 +38,8 @@ Built from recorded links, not written by a model: requirement key → plan item
 | US-027 | EPIC-008 | View and clear notifications | US-027 | 3 | GET /api/notifications, POST /api/notifications/{id}/read, api, db, notifications, web_ui | — | — | not started | not run | 0/2 tested · 0/2 passing | — |
 | US-028 | EPIC-009 | Record changes and approvals of timesheets | US-028 | 3 | api, audit_log, db, time_entries, timesheets | — | — | not started | not run | 0/3 tested · 0/3 passing | — |
 | US-029 | EPIC-009 | View audit history and retention | US-029 | 6 | GET /api/timesheets/{id}/audit, api, audit_log, web_ui | — | — | not started | not run | 0/3 tested · 0/3 passing | — |
-| US-030 | EPIC-010 | Protect personal data | US-030 | 1 | db, edge, leave_requests | — | — | not started | not run | 0/3 tested · 0/3 passing | — |
-| US-031 | EPIC-010 | Company time zone, date format, currency and language | US-031 | 1 | GET /api/settings, PUT /api/settings, api, company_settings, db, web_ui | — | — | not started | not run | 0/5 tested · 0/5 passing | — |
+| US-030 | EPIC-010 | Protect personal data | US-030 | 1 | db, edge, leave_requests | — | — | skipped | not run | 0/3 tested · 0/3 passing | — |
+| US-031 | EPIC-010 | Company time zone, date format, currency and language | US-031 | 1 | GET /api/settings, PUT /api/settings, api, company_settings, db, web_ui | backend/app/main.py, backend/app/models.py, backend/app/routers/settings.py, backend/app/services/__init__.py, backend/app/services/settings.py +1 more | 91d46dd | delivered | not run | 0/5 tested · 0/5 passing | — |
 | US-032 | EPIC-010 | Use the web app on a mobile browser | US-032 | 7 | web_ui | — | — | not started | not run | 0/2 tested · 0/2 passing | — |
-| US-033 | EPIC-010 | Single-tenant deployment for up to 50 employees | US-033 | 1 | api, db, edge, email, scheduler | — | — | not started | not run | 0/3 tested · 0/3 passing | — |
+| US-033 | EPIC-010 | Single-tenant deployment for up to 50 employees | US-033 | 1 | api, db, edge, email, scheduler | — | — | skipped | not run | 0/3 tested · 0/3 passing | — |
 <!-- sdlc:auto:end matrix -->
