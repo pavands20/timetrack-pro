@@ -2,6 +2,1109 @@
 openapi: 3.1.0
 info:
   title: TimeTrack Pro
-  version: architecture-v0
+  version: architecture-v1
   description: Designed API from the approved architecture (not extracted from code).
-paths: {}
+paths:
+  /api/approvals/timesheets:
+    get:
+      summary: Submitted sheets of the manager's direct reports.
+      description: Submitted sheets of the manager's direct reports.
+      operationId: get_api_approvals_timesheets
+      parameters: []
+      responses:
+        '200':
+          description: '[timesheet summary]'
+      security:
+      - bearerAuth: []
+  /api/auth/login:
+    post:
+      summary: Email and password sign-in. Returns a generic error on failure and
+        refuses deactivated accounts.
+      description: Email and password sign-in. Returns a generic error on failure
+        and refuses deactivated accounts.
+      operationId: post_api_auth_login
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{email, password}'
+      responses:
+        '200':
+          description: Sets httpOnly secure JWT cookie, returns {user, roles}
+  /api/auth/logout:
+    post:
+      summary: Clears the session cookie.
+      description: Clears the session cookie.
+      operationId: post_api_auth_logout
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: '204'
+      security:
+      - bearerAuth: []
+  /api/auth/me:
+    get:
+      summary: Current user, roles and unread notification count.
+      description: Current user, roles and unread notification count.
+      operationId: get_api_auth_me
+      parameters: []
+      responses:
+        '200':
+          description: '{user, roles, unread_count}'
+      security:
+      - bearerAuth: []
+  /api/auth/set-password:
+    post:
+      summary: Accept an invite or reset token (single-use, time-limited).
+      description: Accept an invite or reset token (single-use, time-limited).
+      operationId: post_api_auth_set_password
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{token, password}'
+      responses:
+        '200':
+          description: 204 or 400 invalid link
+      security:
+      - bearerAuth: []
+  /api/clients:
+    get:
+      summary: List clients with their projects and tasks (active ones for selection
+        lists).
+      description: List clients with their projects and tasks (active ones for selection
+        lists).
+      operationId: get_api_clients
+      parameters: []
+      responses:
+        '200':
+          description: '[client{projects[{tasks[]}]}]'
+      security:
+      - bearerAuth: []
+    post:
+      summary: Create a client.
+      description: Create a client.
+      operationId: post_api_clients
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{name}'
+      responses:
+        '200':
+          description: 201 client
+      security:
+      - bearerAuth: []
+  /api/clients/{id}:
+    patch:
+      summary: Edit a client.
+      description: Edit a client.
+      operationId: patch_api_clients_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{name?, is_active?}'
+      responses:
+        '200':
+          description: client
+      security:
+      - bearerAuth: []
+  /api/clock:
+    get:
+      summary: Current running entry and break state.
+      description: Current running entry and break state.
+      operationId: get_api_clock
+      parameters: []
+      responses:
+        '200':
+          description: '{running_entry|null, on_break}'
+      security:
+      - bearerAuth: []
+  /api/clock/break/end:
+    post:
+      summary: End a break.
+      description: End a break.
+      operationId: post_api_clock_break_end
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: break
+      security:
+      - bearerAuth: []
+  /api/clock/break/start:
+    post:
+      summary: Start a break.
+      description: Start a break.
+      operationId: post_api_clock_break_start
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: break
+      security:
+      - bearerAuth: []
+  /api/clock/in:
+    post:
+      summary: Clock in. Returns 409 if already running and 423 if the week is locked.
+        No location is captured.
+      description: Clock in. Returns 409 if already running and 423 if the week is
+        locked. No location is captured.
+      operationId: post_api_clock_in
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{project_id, task_id, billable}'
+      responses:
+        '200':
+          description: 201 entry
+      security:
+      - bearerAuth: []
+  /api/clock/out:
+    post:
+      summary: Clock out and compute worked minutes.
+      description: Clock out and compute worked minutes.
+      operationId: post_api_clock_out
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: entry
+      security:
+      - bearerAuth: []
+  /api/leave/balances:
+    get:
+      summary: Balance, taken and pending per balance-bearing leave type.
+      description: Balance, taken and pending per balance-bearing leave type.
+      operationId: get_api_leave_balances
+      parameters: []
+      responses:
+        '200':
+          description: '[{type, balance, taken, pending}]'
+      security:
+      - bearerAuth: []
+  /api/leave/requests:
+    get:
+      summary: Own requests, or direct reports' requests for managers, with balances.
+      description: Own requests, or direct reports' requests for managers, with balances.
+      operationId: get_api_leave_requests
+      parameters: []
+      responses:
+        '200':
+          description: '[request + balance]'
+      security:
+      - bearerAuth: []
+    post:
+      summary: Request leave. end >= start, no medical fields.
+      description: Request leave. end >= start, no medical fields.
+      operationId: post_api_leave_requests
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{leave_type, start_date, end_date, day_portion}'
+      responses:
+        '200':
+          description: 201 request
+      security:
+      - bearerAuth: []
+  /api/leave/requests/{id}/decide:
+    post:
+      summary: Approve or reject. Approved annual leave writes a ledger deduction
+        and the employee is notified.
+      description: Approve or reject. Approved annual leave writes a ledger deduction
+        and the employee is notified.
+      operationId: post_api_leave_requests_id_decide
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{decision: approve|reject}'
+      responses:
+        '200':
+          description: request
+      security:
+      - bearerAuth: []
+  /api/notifications:
+    get:
+      summary: Notifications, newest first.
+      description: Notifications, newest first.
+      operationId: get_api_notifications
+      parameters: []
+      responses:
+        '200':
+          description: '[notification], unread_count'
+      security:
+      - bearerAuth: []
+  /api/notifications/{id}/read:
+    post:
+      summary: Mark a notification read.
+      description: Mark a notification read.
+      operationId: post_api_notifications_id_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: '204'
+      security:
+      - bearerAuth: []
+  /api/projects:
+    post:
+      summary: Create a project with a bill rate.
+      description: Create a project with a bill rate.
+      operationId: post_api_projects
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{client_id, name, bill_rate}'
+      responses:
+        '200':
+          description: 201 project
+      security:
+      - bearerAuth: []
+  /api/projects/{id}:
+    patch:
+      summary: Rename a project or change its rate or active flag.
+      description: Rename a project or change its rate or active flag.
+      operationId: patch_api_projects_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{name?, bill_rate?, is_active?}'
+      responses:
+        '200':
+          description: project
+      security:
+      - bearerAuth: []
+  /api/reports/billable:
+    get:
+      summary: Billable versus non-billable hours and billable value (reporting only).
+      description: Billable versus non-billable hours and billable value (reporting
+        only).
+      operationId: get_api_reports_billable
+      parameters: []
+      responses:
+        '200':
+          description: rows or CSV
+      security:
+      - bearerAuth: []
+  /api/reports/compliance:
+    get:
+      summary: Overtime and missed-break flags.
+      description: Overtime and missed-break flags.
+      operationId: get_api_reports_compliance
+      parameters: []
+      responses:
+        '200':
+          description: rows or CSV
+      security:
+      - bearerAuth: []
+  /api/reports/hours:
+    get:
+      summary: Hours by employee, project and week.
+      description: Hours by employee, project and week.
+      operationId: get_api_reports_hours
+      parameters: []
+      responses:
+        '200':
+          description: rows+totals or text/csv
+      security:
+      - bearerAuth: []
+  /api/reports/leave-taken:
+    get:
+      summary: Approved leave days per employee and type.
+      description: Approved leave days per employee and type.
+      operationId: get_api_reports_leave_taken
+      parameters: []
+      responses:
+        '200':
+          description: rows or CSV
+      security:
+      - bearerAuth: []
+  /api/reports/overtime:
+    get:
+      summary: Overtime hours per employee and week.
+      description: Overtime hours per employee and week.
+      operationId: get_api_reports_overtime
+      parameters: []
+      responses:
+        '200':
+          description: rows or CSV
+      security:
+      - bearerAuth: []
+  /api/reports/payroll-export:
+    get:
+      summary: One row per employee with approved hours only and no pay amounts.
+      description: One row per employee with approved hours only and no pay amounts.
+      operationId: get_api_reports_payroll_export
+      parameters: []
+      responses:
+        '200':
+          description: text/csv
+      security:
+      - bearerAuth: []
+  /api/settings:
+    get:
+      summary: 'Company settings: time zone, currency, labour rules and accrual rates.'
+      description: 'Company settings: time zone, currency, labour rules and accrual
+        rates.'
+      operationId: get_api_settings
+      parameters: []
+      responses:
+        '200':
+          description: settings
+      security:
+      - bearerAuth: []
+    put:
+      summary: Update settings with validation (no negative values).
+      description: Update settings with validation (no negative values).
+      operationId: put_api_settings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{time_zone, currency, daily_limit_minutes, weekly_limit_minutes,
+                min_break_minutes, accrual:{annual, sick}}'
+      responses:
+        '200':
+          description: settings or 422
+      security:
+      - bearerAuth: []
+  /api/tasks:
+    post:
+      summary: Create a task under a project.
+      description: Create a task under a project.
+      operationId: post_api_tasks
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{project_id, name}'
+      responses:
+        '200':
+          description: 201 task
+      security:
+      - bearerAuth: []
+  /api/tasks/{id}:
+    patch:
+      summary: Edit a task.
+      description: Edit a task.
+      operationId: patch_api_tasks_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{name?, is_active?}'
+      responses:
+        '200':
+          description: task
+      security:
+      - bearerAuth: []
+  /api/time-entries/{id}:
+    patch:
+      summary: Edit an entry (audited).
+      description: Edit an entry (audited).
+      operationId: patch_api_time_entries_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: partial entry
+      responses:
+        '200':
+          description: entry
+      security:
+      - bearerAuth: []
+    delete:
+      summary: Delete an entry (audited).
+      description: Delete an entry (audited).
+      operationId: delete_api_time_entries_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '204'
+      security:
+      - bearerAuth: []
+  /api/timesheets/week:
+    get:
+      summary: Weekly sheet for self or a visible user, with days, totals, flags,
+        leave and status.
+      description: Weekly sheet for self or a visible user, with days, totals, flags,
+        leave and status.
+      operationId: get_api_timesheets_week
+      parameters: []
+      responses:
+        '200':
+          description: '{timesheet, days[], totals, flags[], leave[]}'
+      security:
+      - bearerAuth: []
+  /api/timesheets/{id}/approve:
+    post:
+      summary: Approve and lock.
+      description: Approve and lock.
+      operationId: post_api_timesheets_id_approve
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: timesheet
+      security:
+      - bearerAuth: []
+  /api/timesheets/{id}/audit:
+    get:
+      summary: Audit history in time order.
+      description: Audit history in time order.
+      operationId: get_api_timesheets_id_audit
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '[audit record]'
+      security:
+      - bearerAuth: []
+  /api/timesheets/{id}/entries:
+    post:
+      summary: Add a manual entry (audited).
+      description: Add a manual entry (audited).
+      operationId: post_api_timesheets_id_entries
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{work_date, project_id, task_id, billable, worked_minutes,
+                break_minutes}'
+      responses:
+        '200':
+          description: 201 entry
+      security:
+      - bearerAuth: []
+  /api/timesheets/{id}/reject:
+    post:
+      summary: Reject. A comment is required.
+      description: Reject. A comment is required.
+      operationId: post_api_timesheets_id_reject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{comment}'
+      responses:
+        '200':
+          description: timesheet or 422
+      security:
+      - bearerAuth: []
+  /api/timesheets/{id}/submit:
+    post:
+      summary: Submit or resubmit. Refused while an entry is running. Flags never
+        block.
+      description: Submit or resubmit. Refused while an entry is running. Flags never
+        block.
+      operationId: post_api_timesheets_id_submit
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: timesheet
+      security:
+      - bearerAuth: []
+  /api/timesheets/{id}/unlock:
+    post:
+      summary: Unlock an approved sheet (audited).
+      description: Unlock an approved sheet (audited).
+      operationId: post_api_timesheets_id_unlock
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: timesheet
+      security:
+      - bearerAuth: []
+  /api/users:
+    get:
+      summary: List users.
+      description: List users.
+      operationId: get_api_users
+      parameters: []
+      responses:
+        '200':
+          description: '[user]'
+      security:
+      - bearerAuth: []
+    post:
+      summary: Create a user with roles and manager, then email an invite. Duplicate
+        email returns 409.
+      description: Create a user with roles and manager, then email an invite. Duplicate
+        email returns 409.
+      operationId: post_api_users
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{full_name, email, roles[], manager_id}'
+      responses:
+        '200':
+          description: 201 user
+      security:
+      - bearerAuth: []
+  /api/users/{id}:
+    patch:
+      summary: Update roles, manager or active flag.
+      description: Update roles, manager or active flag.
+      operationId: patch_api_users_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '{roles?, manager_id?, is_active?}'
+      responses:
+        '200':
+          description: user
+      security:
+      - bearerAuth: []
+  /api/users/{id}/password-reset:
+    post:
+      summary: Admin sends a reset link email.
+      description: Admin sends a reset link email.
+      operationId: post_api_users_id_password_reset
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: '-'
+      responses:
+        '200':
+          description: '202'
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    users:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        full_name:
+          type: string
+        password_hash:
+          type: string
+        manager_id:
+          type: string
+          format: uuid
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - email
+      - full_name
+      - is_active
+      - created_at
+    user_roles:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        role:
+          type: string
+      required:
+      - user_id
+      - role
+    auth_tokens:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        purpose:
+          type: string
+        token_hash:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        used_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - user_id
+      - purpose
+      - token_hash
+      - expires_at
+    company_settings:
+      type: object
+      properties:
+        id:
+          type: string
+        time_zone:
+          type: string
+        currency:
+          type: string
+        daily_limit_minutes:
+          type: integer
+        weekly_limit_minutes:
+          type: integer
+        break_threshold_minutes:
+          type: integer
+        min_break_minutes:
+          type: integer
+      required:
+      - id
+      - time_zone
+      - currency
+      - daily_limit_minutes
+      - weekly_limit_minutes
+      - break_threshold_minutes
+      - min_break_minutes
+    clients:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        is_active:
+          type: boolean
+      required:
+      - id
+      - name
+      - is_active
+    projects:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        client_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        bill_rate:
+          type: number
+        is_active:
+          type: boolean
+      required:
+      - id
+      - client_id
+      - name
+      - is_active
+    tasks:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        is_active:
+          type: boolean
+      required:
+      - id
+      - project_id
+      - name
+      - is_active
+    timesheets:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        week_start:
+          type: string
+          format: date
+        status:
+          type: string
+        reject_comment:
+          type: string
+        submitted_at:
+          type: string
+          format: date-time
+        decided_by:
+          type: string
+          format: uuid
+        decided_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - user_id
+      - week_start
+      - status
+    time_entries:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        timesheet_id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        task_id:
+          type: string
+          format: uuid
+        billable:
+          type: boolean
+        source:
+          type: string
+        work_date:
+          type: string
+          format: date
+        start_utc:
+          type: string
+          format: date-time
+        end_utc:
+          type: string
+          format: date-time
+        break_minutes:
+          type: integer
+        worked_minutes:
+          type: integer
+      required:
+      - id
+      - timesheet_id
+      - user_id
+      - project_id
+      - task_id
+      - billable
+      - source
+      - work_date
+      - break_minutes
+    entry_breaks:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        time_entry_id:
+          type: string
+          format: uuid
+        start_utc:
+          type: string
+          format: date-time
+        end_utc:
+          type: string
+          format: date-time
+      required:
+      - id
+      - time_entry_id
+      - start_utc
+    leave_types:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+        has_balance:
+          type: boolean
+        accrual_days_per_month:
+          type: number
+      required:
+      - id
+      - code
+      - has_balance
+    leave_requests:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        leave_type_id:
+          type: string
+          format: uuid
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        day_portion:
+          type: string
+        days:
+          type: number
+        status:
+          type: string
+        decided_by:
+          type: string
+          format: uuid
+        decided_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - user_id
+      - leave_type_id
+      - start_date
+      - end_date
+      - day_portion
+      - days
+      - status
+    leave_ledger:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        leave_type_id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+        days:
+          type: number
+        accrual_month:
+          type: string
+          format: date
+        leave_request_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - user_id
+      - leave_type_id
+      - kind
+      - days
+      - created_at
+    notifications:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+        payload:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        read_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - user_id
+      - kind
+      - payload
+      - created_at
+    audit_log:
+      type: object
+      properties:
+        id:
+          type: string
+        occurred_at:
+          type: string
+          format: date-time
+        actor_id:
+          type: string
+          format: uuid
+        timesheet_id:
+          type: string
+          format: uuid
+        action:
+          type: string
+        old_values:
+          type: string
+        new_values:
+          type: string
+      required:
+      - id
+      - occurred_at
+      - actor_id
+      - timesheet_id
+      - action

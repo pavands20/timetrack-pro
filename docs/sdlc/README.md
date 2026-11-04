@@ -23,7 +23,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 ▎
 ▎ Audit: record who changed or approved any timesheet, and when.
 
-**Documentation version:** v1
+**Documentation version:** v2
 <!-- sdlc:auto:end overview -->
 
 ## Contents
@@ -32,15 +32,15 @@ Build a time and labour management web app for a company of up to 500 employees,
 | Document | State |
 |---|---|
 | [Requirements](requirements/README.md) | v1 approved |
-| [Architecture](architecture/README.md) | 1 entry |
+| [Architecture](architecture/README.md) | 32 entries |
 | [Development](development/README.md) | 1 entry |
 | [Testing](testing/README.md) | 1 entry |
 | [Deployment](deployment/README.md) | 1 entry |
 | [Maintenance](maintenance/README.md) | 1 entry |
-| [Data model](architecture/data-model.md) | not generated yet |
-| [API (OpenAPI)](architecture/api/openapi.yaml) | not generated yet |
-| [Decisions (ADRs)](architecture/adr/README.md) | 0 decisions |
-| [Sprint plan](development/sprint-plan.md) | not generated yet |
+| [Data model](architecture/data-model.md) | generated |
+| [API (OpenAPI)](architecture/api/openapi.yaml) | generated |
+| [Decisions (ADRs)](architecture/adr/README.md) | 4 decisions |
+| [Sprint plan](development/sprint-plan.md) | 7 sprints |
 | [Developer guide](development/developer-guide.md) | not generated yet |
 | [API reference](development/api-reference.md) | 0 routes |
 | [Test report](testing/test-report.md) | not run yet |
@@ -49,7 +49,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [Runbook](deployment/runbook.md) | not deployed yet |
 | [Release notes](deployment/release-notes.md) | 0 releases |
 | [Traceability matrix](traceability-matrix.md) | 33 requirements |
-| [Changelog](CHANGELOG.md) | 1 version |
+| [Changelog](CHANGELOG.md) | 2 versions |
 <!-- sdlc:auto:end contents -->
 
 ## Open gaps
@@ -112,8 +112,52 @@ Build a time and labour management web app for a company of up to 500 employees,
 
 ### Architecture
 
-- Architecture phase has not started. There is no system design, data model, API design or hosting topology.
-- US-003 references an 'architecture finding' that does not exist in the provided input.
+- The architecture input does not reference any known requirement key (US-001 to US-033). The links between design elements and user stories cannot be confirmed from this input.
+- No approval date or approver is recorded for version 1.
+- The input does not describe monitoring, logging, alerting, backup retention or disaster recovery.
+- The 6-year audit retention period has no stated rationale or source requirement.
+- Screen-level design (screen keys) is not part of this input.
+- Required roles are not stated for most endpoints, for example which admin role manages users, clients, projects or settings. Only unlock (Payroll Admin), payroll export (Payroll Admin), approve/reject (current manager) and report scoping are specified.
+- JWT expiry, refresh behaviour and CSRF protection for the cookie-based session are not described.
+- Login throttling or account lockout is not described.
+- Conflict: the audit retention sweep deletes audit rows, but ARCH-COMP-DB makes audit_log append-only through grants and a trigger. The input does not explain how the sweep is permitted to delete, for example a separate role or a trigger exception.
+- No frequency is stated for the token cleanup job.
+- The mechanism for database-enforced status locks is not described, for example a trigger or constraint.
+- The specific SMTP provider is not named.
+- Possible discrepancy: the project description says only Approved sheets are locked, but this path also refuses entries in Submitted weeks. This needs confirmation.
+- audit_log rows are keyed by timesheet_id. The input does not say whether a timesheet row is created automatically when an employee first clocks in for a week.
+- Handling of an entry still running across midnight or across the week boundary is not described.
+- The unlock transition by Payroll Admin is not in the project description, which only says approved sheets are locked. Confirm which requirement it traces to.
+- The input does not say who acts if an employee has no manager or the manager changes mid-review.
+- The input does not say whether the employee is notified on unlock.
+- Flags use the current labour rules. The input does not say whether historical weeks are re-flagged when the rules change.
+- The input does not say whether overtime hours are double-counted when both the daily and weekly limits are exceeded.
+- The payroll 'period' is not defined, for example whether it is weekly, monthly or a custom date range.
+- System Admin report visibility is not stated.
+- The input does not define which leave types are balance-bearing. The project description implies annual leave, but sick and unpaid leave are not specified.
+- Behaviour for a missed run (app down on the 1st) or for employees who join mid-month is not described.
+- There is no self-service 'forgot password' flow; resets are admin-initiated only. Confirm this matches the requirements.
+- Password complexity rules are not stated.
+- audit_log is keyed to timesheet_id only, so changes to users, settings or leave are not covered by the audit design. This matches the project description's audit scope, which is timesheets only.
+- timesheets stores only a single reject_comment field. Rejection history across multiple rejections appears to rely on audit_log; this is not confirmed.
+- The required role is not stated; the project description says 'Admins'.
+- There is no delete endpoint; deactivation is via the active flag.
+- The input does not say whether a bill rate change applies retroactively to billable-value reports.
+- The required admin role is not stated.
+- The required role is not stated.
+- There is no endpoint to create or edit leave types themselves; accrual rates are included in settings.
+- Who may view the audit history is not stated.
+- Only annual leave is stated to write a ledger deduction. Ledger behaviour for sick and unpaid leave is not specified.
+- The input does not say whether a request exceeding the available balance is refused or only flagged.
+- Cancellation of an approved leave request is not covered.
+- No notification retention or cleanup is described.
+- The input does not say whether every report has a CSV variant or only some. The project description requires CSV export for reports.
+- A single task means no redundancy. Availability targets are not stated.
+- The advisory lock implies multiple instances may run at some point, but scaling plans are not described.
+- Only the dev configuration (single-AZ) is stated. The production RDS configuration, including Multi-AZ and backup retention, is not described.
+- No secret rotation policy is stated.
+- No comparison reasoning is given for rejecting Vue or Angular.
+- GDPR obligations beyond data residency and encryption, such as data subject access and erasure, are not addressed in this architecture input. This is noted for human review, not as a legal assessment.
 
 ### Development
 
