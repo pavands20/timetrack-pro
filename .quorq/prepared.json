@@ -1,0 +1,54 @@
+{
+  "key": {
+    "app_design_id": "959724c3-aebd-4178-81bf-a76d3067df9f",
+    "app_design_version": 1,
+    "architecture_document_id": "b139d204-52c1-4ecc-b919-4081b1dcd11b",
+    "architecture_version": 1
+  },
+  "outcome": "prepared",
+  "packages": [
+    {
+      "ecosystem": "pypi",
+      "installed_version": "25.1.0",
+      "name": "argon2-cffi",
+      "status": "installed",
+      "version": ">=23.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "installed_version": "2.15.1",
+      "name": "PyJWT",
+      "status": "installed",
+      "version": ">=2.8.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "installed_version": "2.3.0",
+      "name": "email-validator",
+      "status": "installed",
+      "version": ">=2.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "installed_version": "3.11.3",
+      "name": "APScheduler",
+      "status": "installed",
+      "version": ">=3.10,<4"
+    },
+    {
+      "ecosystem": "pypi",
+      "installed_version": "2026.6",
+      "name": "tzdata",
+      "status": "installed",
+      "version": ""
+    },
+    {
+      "ecosystem": "npm",
+      "error": "already provided by the scaffold",
+      "name": "dayjs",
+      "status": "skipped",
+      "version": ">=1.11.0"
+    }
+  ],
+  "prepared_by_run": "ed4d1456-4b7d-4a4b-a1ac-57775edc54fc"
+}

@@ -15,6 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app import models  # noqa: F401 -- imported so the tables register before create_all
 from app.database import Base, engine
+from app.routers import auth, settings
 
 
 @asynccontextmanager
@@ -34,7 +35,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(
     title="TimeTrack Pro",
-    description="Build a time and labour management web app for a company of up to 500 employees, similar to Replicon.\n\u258e\n\u258e Users and roles: Employee, Manager, Payroll Admin, System Admin. Sign-in with email and password. Admins create users and assign each employee a manager.\n\u258e\n\u258e Time tracking: employees clock in and out (with breaks) from the browser, or fill a weekly timesheet by day. Each time entry is charged to a project and task. Entries can be marked billable or non-billable.\n\u258e\n\u258e Projects: admins create clients, projects and tasks, with an hourly bill rate per project.\n\u258e\n\u258e Timesheet approval: employees submit their week. The manager approves or rejects it with a comment, and a rejected sheet goes back for editing. Approved sheets are locked.\n\u258e\n\u258e Time off: employees request leave (annual, sick, unpaid) for full or half days. The manager approves it. Each employee sees their leave balance, which grows by a fixed number of days per month.\n\u258e\n\u258e Labour rules: an admin sets the daily and weekly overtime limits, for example 8 h per day and 40 h per week, plus the minimum break after 6 hours. The app flags overtime and missed breaks on the timesheet and in a compliance report.\n\u258e\n\u258e Reports: hours by employee, project and week; billable versus non-billable hours; overtime; leave taken. Export to CSV, including a payroll export of approved hours per employee per period.\n\u258e\n\u258e Notifications: in-app alerts for a timesheet due, approved or rejected, and a leave request decided.\n\u258e\n\u258e Audit: record who changed or approved any timesheet, and when.",
+    description="Build a time and labour management web app for a company of up to 500 employees, similar to Replicon.\n\u258e\n\u258e Users and roles: Employee, Manager, Payroll Admin, System Admin. Sign-in with email and password. Admins create users and assign each employee a manager.\n\u258e\n\u258e Time tracking: employees clock in and out (with breaks) from the browser, or fill a weekly timesheet by day. Each time entry is charged to a project and task. Entries can be marked billable or non-billable.\n\u258e\n\u258e Projects: admins create clients, projects and tasks, with an hourly bill rate per project.\n\u258e\n\u258e Timesheet approval: employees submit their week. The manager approves or rejects it with a comment, and a rejected sheet goes back for editing. Approved sheets are locked.\n\u258e\n\u258e Time off: employees request leave (annual, sick, unpaid) for full or half days. The manager approves it. Each employee sees their leave balance, which grows by a fixed number of days per month.\n\u258e\n\u258e Labour rules: an admin sets the daily and weekly overtime limits, for example 8 h per day and 40 h per week, plus the minimum break after 6 hours. The app flags overtime and missed breaks on the timesheet and in a compliance report.\n\u258e\n\u258e Reports: hours by employee, project and week; billable versus non-billable hours; overtime; leave taken. Export to CSV, including a payroll export of approved hours per employee per period.\n\u258e\n\u258e Notifications: in-app alerts for a timesheet due, approved or rejected, and a leave request decided.\n\u258e\n\u258e Audit: record who changed or approved any timesheet, and when.",  # noqa: E501
     version="0.1.0",
     lifespan=lifespan,
 )
@@ -52,6 +53,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+app.include_router(auth.router)
+app.include_router(settings.router)
 
 
 @app.get("/health")
