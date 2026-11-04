@@ -23,7 +23,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 ▎
 ▎ Audit: record who changed or approved any timesheet, and when.
 
-**Documentation version:** v3
+**Documentation version:** v4
 <!-- sdlc:auto:end overview -->
 
 ## Contents
@@ -35,7 +35,7 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [Architecture](architecture/README.md) | 32 entries |
 | [Development](development/README.md) | 20 entries |
 | [Testing](testing/README.md) | 1 entry |
-| [Deployment](deployment/README.md) | 1 entry |
+| [Deployment](deployment/README.md) | 3 entries |
 | [Maintenance](maintenance/README.md) | 1 entry |
 | [Data model](architecture/data-model.md) | generated |
 | [API (OpenAPI)](architecture/api/openapi.yaml) | generated |
@@ -45,11 +45,11 @@ Build a time and labour management web app for a company of up to 500 employees,
 | [API reference](development/api-reference.md) | 1 route |
 | [Test report](testing/test-report.md) | not run yet |
 | [Tests](testing/test-cases.md) | 0 tests |
-| [Deployment guide](deployment/deployment-guide.md) | not deployed yet |
-| [Runbook](deployment/runbook.md) | not deployed yet |
-| [Release notes](deployment/release-notes.md) | 0 releases |
+| [Deployment guide](deployment/deployment-guide.md) | deployed |
+| [Runbook](deployment/runbook.md) | deployed |
+| [Release notes](deployment/release-notes.md) | 1 release |
 | [Traceability matrix](traceability-matrix.md) | 33 requirements |
-| [Changelog](CHANGELOG.md) | 3 versions |
+| [Changelog](CHANGELOG.md) | 4 versions |
 <!-- sdlc:auto:end contents -->
 
 ## Open gaps
@@ -207,7 +207,23 @@ Build a time and labour management web app for a company of up to 500 employees,
 
 ### Deployment
 
-- No deployment recorded yet. EU/UK region hosting (NFR-006) and HTTPS (NFR-005) remain unverified.
+- No deployment date or time recorded.
+- No record of who performed or approved this deployment.
+- No release notes, and no list of which requirements (US-001 to US-033) are included in this version. related_ids to requirements cannot be set.
+- Environment type is not stated (production, staging, or demo). 'Live' alone does not confirm this is the production environment for end users.
+- No post-deployment smoke test or health-check results recorded.
+- No rollback plan or previous version identifier recorded.
+- No monitoring, logging, or alerting configuration recorded.
+- No database or migration details recorded. This matters because the app stores timesheets, leave balances, payroll exports, and audit history (US-related audit requirement).
+- No backup or data-retention arrangements recorded for timesheet and audit data.
+- No custom domain recorded. The default Amplify domain is in use, and it is not stated whether this is intended for end users.
+- No confirmation that the frontend is configured to call the backend URL listed for this release.
+- No browser compatibility or accessibility verification recorded for the deployed build.
+- Use of an sslip.io hostname (a direct IP mapping) should be confirmed as intended. It may not be suitable for a production system handling employee sign-in credentials and payroll data.
+- No information on the hosting provider, server or runtime, scaling, or availability for up to 500 employees.
+- No record of TLS certificate management, CORS configuration, or security hardening.
+- No record of how secrets and credentials (e.g. database, password hashing configuration) are managed in this environment.
+- No API health-check result recorded for this deployment.
 
 ### Maintenance
 
